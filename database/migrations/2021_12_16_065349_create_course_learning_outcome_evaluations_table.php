@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTopicsTable extends Migration
+class CreateCourseLearningOutcomeEvaluationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,13 @@ class CreateTopicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('course_learning_outcome_evaluations', function (Blueprint $table) {
             $table->id();
-
-            $table->string("title_en");
-            $table->string("title_id");
-            $table->text("indicator");
-            $table->unsignedTinyInteger("start_week");
-            $table->unsignedTinyInteger("end_week");
-            $table->string("learning_method");
-            $table->double("percent_to_LO");
 
             $table->unsignedBigInteger("CLO_id");
             $table->foreign("CLO_id")->on("course_learning_outcomes")->references("id");
+            $table->unsignedBigInteger("evaluation_id");
+            $table->foreign("evaluation_id")->on("evaluations")->references("id");
 
             $table->timestamps();
         });
@@ -38,6 +32,6 @@ class CreateTopicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('couse_learning_outcome_evaluations');
     }
 }
