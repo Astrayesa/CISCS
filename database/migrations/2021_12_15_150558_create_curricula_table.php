@@ -22,7 +22,10 @@ class CreateCurriculaTable extends Migration
 
             $table->unsignedBigInteger("department_id");
             $table->foreign("department_id")->on("departments")->references("id");
+
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

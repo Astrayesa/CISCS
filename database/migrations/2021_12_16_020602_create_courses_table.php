@@ -26,6 +26,9 @@ class CreateCoursesTable extends Migration
             $table->unsignedTinyInteger("theory_credit");
             $table->unsignedTinyInteger("non_theory_credit");
 
+            $table->unsignedBigInteger("curriculum_id");
+            $table->foreign("curriculum_id")->on("curricula")->references("id");
+
             $table->timestamps();
         });
     }

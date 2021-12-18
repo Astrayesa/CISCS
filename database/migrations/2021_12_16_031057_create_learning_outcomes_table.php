@@ -25,6 +25,8 @@ class CreateLearningOutcomesTable extends Migration
             $table->foreign("curriculum_id")->on("curricula")->references("id");
 
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

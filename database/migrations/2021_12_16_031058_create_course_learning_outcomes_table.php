@@ -28,6 +28,8 @@ class CreateCourseLearningOutcomesTable extends Migration
             $table->foreign("LO_id")->on("learning_outcomes")->references("id");
 
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

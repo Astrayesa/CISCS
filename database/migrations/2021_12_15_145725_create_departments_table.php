@@ -22,7 +22,9 @@ class CreateDepartmentsTable extends Migration
             $table->string("accreditation_cert_num");
             $table->string("accreditation_ranking");
             $table->string("accreditation_file");
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

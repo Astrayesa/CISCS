@@ -28,6 +28,7 @@ class CreateTopicsTable extends Migration
             $table->foreign("CLO_id")->on("course_learning_outcomes")->references("id");
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

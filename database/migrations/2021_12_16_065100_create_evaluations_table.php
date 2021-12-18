@@ -21,6 +21,7 @@ class CreateEvaluationsTable extends Migration
             $table->double("percent_to_graduate_CLO");
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

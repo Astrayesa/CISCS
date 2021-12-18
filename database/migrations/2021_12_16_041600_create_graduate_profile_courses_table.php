@@ -22,6 +22,7 @@ class CreateGraduateProfileCoursesTable extends Migration
             $table->foreign("course_id")->on("courses")->references("id");
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

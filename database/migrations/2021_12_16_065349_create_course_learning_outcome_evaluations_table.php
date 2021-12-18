@@ -22,6 +22,7 @@ class CreateCourseLearningOutcomeEvaluationsTable extends Migration
             $table->foreign("evaluation_id")->on("evaluations")->references("id");
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
