@@ -90,6 +90,7 @@
         <script src="https://kit.fontawesome.com/7660a2f8ef.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @yield("script")
     </div>
 </body>

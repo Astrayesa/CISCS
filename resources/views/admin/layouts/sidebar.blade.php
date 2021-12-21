@@ -22,7 +22,7 @@
                     <a href="{{ route('admin.user.index') }}"
                         class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-fw fa-users"></i>
-                        <p>Users</p>
+                        <p>Users Account</p>
                     </a>
                 </li>
 

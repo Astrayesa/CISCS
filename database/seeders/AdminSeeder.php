@@ -14,13 +14,21 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        // User::create([
+        //     'name' => 'admin',
+        //     'username' => 'admin',
+        //     'email' => 'admin@ciscs.com',
+        //     'email_verified_at' => date('Y-m-d H:i:s', time()),
+        //     'password' => bcrypt('rahasia'),
+        //     'is_admin' => true,
+        // ]);
         User::create([
-            'name' => 'admin',
-            'username' => 'admin',
-            'email' => 'admin@ciscs.com',
+            'name' => 'jack',
+            'username' => 'jack',
+            'email' => 'jack@ciscs.com',
             'email_verified_at' => date('Y-m-d H:i:s', time()),
             'password' => bcrypt('rahasia'),
-            'is_admin' => true,
+            'is_admin' => false,
         ]);
     }
 }
