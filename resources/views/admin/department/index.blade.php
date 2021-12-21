@@ -1,4 +1,4 @@
-@extends("admin.template")
+@extends("admin.layouts.main")
 
 @section("header")
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
@@ -9,7 +9,7 @@
 @endsection
 
 @section("content")
-    <a href="{{ route('department.create') }}" class="btn btn-primary mb-3">
+    <a href="{{ route('admin.department.create') }}" class="btn btn-primary mb-3">
         <i class="fas fa-plus" aria-hidden="true"></i> Add Department
     </a>
     <table id="data_table" class="table width-100">
@@ -34,7 +34,7 @@
                             data-target="#modal_detail" onclick="setDepartment({{ $d->id }})">
                         <i class="fas fa-eye"></i> Show
                     </button>
-                    <a href="{{ route('department.edit', $d->id) }}" class="btn btn-sm btn-warning mr-1">
+                    <a href="{{ route('admin.department.edit', $d->id) }}" class="btn btn-sm btn-warning mr-1">
                         <i class="fas fa-edit"></i> Edit
                     </a>
                     <button class="btn btn-sm btn-danger btn-hapus"
@@ -122,7 +122,7 @@
 
     <script>
         function setDepartment(department_id) {
-            fetch("{{ route('department.index') }}/" + department_id)
+            fetch("{{ route('admin.department.index') }}/" + department_id)
                 .then(response => response.json())
                 .then(({
                            accreditation_cert_num,
@@ -158,7 +158,7 @@
                 confirmButtonText: "Yes, delete it!",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('<form action="{{ route('department.index') }}/' + id +
+                    $('<form action="{{ route('admin.department.index') }}/' + id +
                         '" method="post"> @csrf @method("delete") </form>').appendTo('body').submit();
                 }
             });

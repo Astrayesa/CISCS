@@ -1,4 +1,4 @@
-@extends("admin.template")
+@extends("admin.layouts.main")
 
 @section("page_name")
     Department
@@ -6,7 +6,7 @@
 
 @section("content")
     <div class="col-md-2 mb-3">
-        <a href="{{ route("department.index") }}" class="btn btn-secondary">
+        <a href="{{ route("admin.department.index") }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i> Return
         </a>
     </div>
@@ -18,7 +18,7 @@
             <h3 class="card-title">{{ $department ? "Edit" : "Add" }} Department Data</h3>
         </div>
         {{--            TODO: isi old data kalo salah input--}}
-        <form action="{{ $department ? route("department.update", $department->id) : route("department.store") }}"
+        <form action="{{ $department ? route("admin.department.update", $department->id) : route("admin.department.store") }}"
               method="post" enctype="multipart/form-data">
             @csrf
             @if($department)

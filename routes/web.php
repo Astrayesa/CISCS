@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
