@@ -50,7 +50,6 @@ class DepartmentController extends Controller
     {
         // TODO: validation
         $data = $request->all();
-//        dd($data);
         $filename = "department-" . time() . "." . $request->file("accreditation_file")->getClientOriginalExtension();
         $file_path = $request->file("accreditation_file")->storeAs("accreditation_file", $filename, "public");
         $data["accreditation_file"] = $file_path;
@@ -92,7 +91,11 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         // TODO: validation
-        $department->update($request->all());
+        $data = $request->all();
+        $filename = "department-" . time() . "." . $request->file("accreditation_file")->getClientOriginalExtension();
+        $file_path = $request->file("accreditation_file")->storeAs("accreditation_file", $filename, "public");
+        $data["accreditation_file"] = $file_path;
+        $department->update($data);
         return redirect()->route("admin.department.index");
     }
 
