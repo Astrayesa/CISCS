@@ -19,6 +19,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.curriculum.index') }}"
+                       class="nav-link {{ request()->routeIs('admin.curriculum.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-fw fa-book"></i>
+                        <p>Curriculum</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}"
                         class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-fw fa-users"></i>
@@ -29,14 +36,12 @@
                 <li>
                     <hr style="border-top: 1px solid grey" />
                 </li>
-                @if (Route::has('admin.logout'))
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
                             <i class="nav-icon fas fa-fw fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>
                     </li>
-                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
