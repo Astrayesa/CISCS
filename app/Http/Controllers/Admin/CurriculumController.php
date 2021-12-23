@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CurriculumController extends Controller
 {
@@ -66,10 +65,11 @@ class CurriculumController extends Controller
     public function show(Curriculum $curriculum)
     {
         //
-        $data = $curriculum->load(["department" => function ($query) {
-            $query->select("id", "name_en");
-        }]);
-        return $data->toJson();
+        $courses = $curriculum->courses()->get();
+        $graduateProfiles = $curriculum->graduateProfiles()->get();
+        $learningOutcomes = $curriculum->learningOutcomes()->get();
+
+        return view("admin.curriculum.show", compact("curriculum", "courses", "graduateProfiles", "learningOutcomes"));
     }
 
     /**

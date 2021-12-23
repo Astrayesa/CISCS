@@ -30,10 +30,13 @@
                 <td>{{ $d->name_en }}</td>
                 <td>{{ $d->department->name_en }}</td>
                 <td>
-                    <button class="btn btn-sm btn-success mr-1" data-toggle="modal"
+                    {{--<button class="btn btn-sm btn-success mr-1" data-toggle="modal"
                             data-target="#modal_detail" onclick="setCurriculum({{ $d->id }})">
                         <i class="fas fa-eye"></i> Show
-                    </button>
+                    </button>--}}
+                    <a href="{{ route('admin.curriculum.show', $d->id) }}" class="btn btn-sm btn-success mr-1">
+                        <i class="fas fa-eye"></i> Show
+                    </a>
                     <a href="{{ route('admin.curriculum.edit', $d->id) }}" class="btn btn-sm btn-warning mr-1">
                         <i class="fas fa-edit"></i> Edit
                     </a>

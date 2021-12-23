@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CurriculumController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\GraduateProfileController;
+use App\Http\Controllers\Admin\LearningOutcomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +30,9 @@ Route::prefix("/admin")->name('admin.')->group(function () {
         Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
         Route::resource("department", DepartmentController::class);
         Route::resource("curriculum", CurriculumController::class);
+        Route::resource("curriculum.course", CourseController::class);
+        Route::resource("curriculum.lo", LearningOutcomeController::class)->parameter("lo", "learningOutcome");
+        Route::resource("curriculum.gp", GraduateProfileController::class)->parameter("gp", "graduateProfile");
         Route::resource("user", UserController::class);
 
         Route::post('logout', [AuthController::class, 'destroy'])->name("logout");

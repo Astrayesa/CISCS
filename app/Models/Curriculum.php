@@ -21,4 +21,20 @@ class Curriculum extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    function graduateProfiles()
+    {
+        return $this->hasMany(GraduateProfile::class);
+    }
+
+    function learningOutcomes()
+    {
+        return $this->hasMany(LearningOutcome::class);
+    }
+
 }
