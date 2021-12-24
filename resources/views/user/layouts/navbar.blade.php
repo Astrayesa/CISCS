@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3 shadow border-bottom border-info border-4">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('unila.png') }}" alt="logo" width="30" class="d-inline-block align-top">
             <span class="ms-2"> <strong>{{ env('APP_NAME') }}</strong></span>
         </a>

@@ -1,5 +1,9 @@
 @extends("admin.layouts.main")
 
+@section('header')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+@endsection
+
 @section('page_name')
     Users Account
 @endsection
@@ -23,17 +27,17 @@
                 </div>
             @endif
             <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3">
-                <i class="fas fa-plus" aria-hidden="true"></i> Tambah Data
+                <i class="fas fa-plus" aria-hidden="true"></i> Add User
             </a>
             <div class="table-responsive">
-                <table id="myTable" class="table text-center" style="width:100%">
+                <table id="myTable" class="table table-striped table-bordered text-center" style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,13 +52,10 @@
                                         class="btn btn-sm btn-warning mr-1">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}" onsubmit="return confirm('Apakah anda ingin menghapus ?')" method="POST" style="display: inline-block">
-                                        @csrf
-                                        @method("DELETE")
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    <button type="submit" onclick="deleteData({{ $user->id }})"
+                                        class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -63,4 +64,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        function deleteData(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`<form action="{{ route('admin.user.index') }}/${id}" method="post"> @csrf @method("delete") </form>`).appendTo('body').submit();
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
 @endsection
