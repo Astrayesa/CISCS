@@ -9,15 +9,15 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Form Tambah User</h3>
+                    <h3 class="card-title">Add User Form</h3>
                 </div>
                 <form action="{{ route('admin.user.store') }}" id="quickForm" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Nama</label>
+                            <label for="name">Name</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
-                                placeholder="Masukkan nama lengkap..." value="{{ old("name") }}">
+                                placeholder="Fullname" value="{{ old("name") }}" required>
                             <div class="invalid-feedback">
                                 @error('name')
                                     {{ $message }}
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                                id="username" placeholder="Masukkan username..." value="{{ old("username") }}">
+                                id="username" placeholder="Username" value="{{ old("username") }}" required>
                             <div class="invalid-feedback">
                                 @error('username')
                                     {{ $message }}
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                id="exampleInputEmail1" placeholder="Masukkan email..." value="{{ old("email") }}">
+                                id="exampleInputEmail1" placeholder="Email" value="{{ old("email") }}" required>
                             <div class="invalid-feedback">
                                 @error('email')
                                     {{ $message }}
@@ -48,7 +48,7 @@
                             <label for="password">Password</label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="password"
-                                placeholder="Password...">
+                                placeholder="Password..." required>
                             <div class="invalid-feedback">
                                 @error('password')
                                     {{ $message }}
@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
                             <input type="password" name="password_confirmation" class="form-control"
-                                id="password_confirmation" placeholder="Confirm Password...">
+                                id="password_confirmation" placeholder="Confirm Password..." required>
                         </div>
                     </div>
                     <div class="card-footer">

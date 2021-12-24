@@ -37,4 +37,30 @@
             </button>
         </div>
     </section>
+
+    <section class="department py-5">
+        <div class="container">
+            <h3 class="text-center mb-4"><strong>Departments</strong></h3>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-5 mb-3">
+                    <a href="/calon/presiden" class="text-decoration-none">
+                        <div class="card text-center shadow d-flex rounded-3 bg-dark" style="height: 7rem">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <h5 class="card-title text-white">Computer Science</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <a href="/calon/gubernur" class="text-decoration-none">
+                        <div class="card text-center shadow d-flex rounded-3 bg-dark" style="height: 7rem">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <h5 class="card-title text-white">Informatics Management</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
