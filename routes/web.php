@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\CourseLearningOutcomeController;
 use App\Http\Controllers\Admin\CurriculumController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -31,6 +32,7 @@ Route::prefix("/admin")->name('admin.')->group(function () {
         Route::resource("department", DepartmentController::class);
         Route::resource("curriculum", CurriculumController::class);
         Route::resource("curriculum.course", CourseController::class);
+        Route::resource("curriculum.course.clo", CourseLearningOutcomeController::class);
         Route::resource("curriculum.lo", LearningOutcomeController::class)->parameter("lo", "learningOutcome");
         Route::resource("curriculum.gp", GraduateProfileController::class)->parameter("gp", "graduateProfile");
         Route::resource("user", UserController::class);

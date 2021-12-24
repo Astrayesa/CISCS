@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-2 mb-3">
+            <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Return
+            </a>
+        </div>
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
@@ -16,8 +21,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
-                                placeholder="Fullname" value="{{ old("name") }}" required>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                id="name" placeholder="Fullname" value="{{ old('name') }}" required>
                             <div class="invalid-feedback">
                                 @error('name')
                                     {{ $message }}
@@ -27,7 +32,7 @@
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                                id="username" placeholder="Username" value="{{ old("username") }}" required>
+                                id="username" placeholder="Username" value="{{ old('username') }}" required>
                             <div class="invalid-feedback">
                                 @error('username')
                                     {{ $message }}
@@ -37,7 +42,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                id="exampleInputEmail1" placeholder="Email" value="{{ old("email") }}" required>
+                                id="exampleInputEmail1" placeholder="Email" value="{{ old('email') }}" required>
                             <div class="invalid-feedback">
                                 @error('email')
                                     {{ $message }}

@@ -9,4 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CourseLearningOutcome extends Model
 {
     use HasFactory, softDeletes;
+
+    protected $fillable = [
+        "title_en",
+        "title_id",
+        "desc_en",
+        "desc_id",
+        "percent_to_graduate_LO",
+        "lesson_plan_id",
+        "LO_id",
+    ];
 }
