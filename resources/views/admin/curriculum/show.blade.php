@@ -6,7 +6,7 @@
 
 @section("content")
     <!-- /.card -->
-    <div class="card">
+    <div class="card mb-4 mt-3">
         <div class="card-header">
             <h3 class="card-title">Curriculum Courses</h3>
             <div class="card-tools">
@@ -65,7 +65,7 @@
     <!-- /.card -->
 
     <!-- /.card -->
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
             <h3 class="card-title">Curriculum Learning Outcomes</h3>
             <div class="card-tools">
@@ -120,7 +120,7 @@
     <!-- /.card -->
 
     <!-- /.card -->
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
             <h3 class="card-title">Curriculum Graduate Profiles</h3>
             <div class="card-tools">

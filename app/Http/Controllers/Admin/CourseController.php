@@ -8,8 +8,8 @@ use App\Models\Curriculum;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use function view;
 
 class CourseController extends Controller
@@ -17,7 +17,7 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return void
      */
     public function index()
     {
@@ -32,62 +32,80 @@ class CourseController extends Controller
     public function create(Curriculum $curriculum)
     {
         //
-        return view("admin.course.create");
+        $course = null;
+        return view("admin.course.create", compact("curriculum", "course"));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @param Curriculum $curriculum
+     * @return RedirectResponse
      */
     public function store(Request $request, Curriculum $curriculum)
     {
         //
+        $data = $request->all();
+        $data["curriculum_id"] = $curriculum->id;
+//        dd($data, $request);
+        Course::create($data);
+        return redirect()->route("admin.curriculum.show", $curriculum->id);
     }
 
     /**
      * Display the specified resource.
      *
+     * @param Curriculum $curriculum
      * @param Course $course
-     * @return Response
+     * @return Application|Factory|View
      */
     public function show(Curriculum $curriculum, Course $course)
     {
         //
+        $lessonPlan = $course->lesson_plan()->get();
+        $clos = $course->clos()->get();
+        return view("admin.course.show", compact("curriculum", "course", "lessonPlan", "clos"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param Curriculum $curriculum
      * @param Course $course
-     * @return Response
+     * @return Application|Factory|View
      */
     public function edit(Curriculum $curriculum, Course $course)
     {
         //
+        return view("admin.course.create", compact("curriculum", "course"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
+     * @param Curriculum $curriculum
      * @param Course $course
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, Curriculum $curriculum,  Course $course)
+    public function update(Request $request, Curriculum $curriculum, Course $course)
     {
         //
+        $course->update($request->all());
+        return redirect()->route("admin.curriculum.show", $curriculum->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Course $course
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Curriculum $curriculum, Course $course)
     {
         //
+        $course->delete();
+        return redirect()->back();
     }
 }

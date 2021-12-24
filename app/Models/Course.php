@@ -12,6 +12,23 @@ class Course extends Model
 
     protected $fillable = [
         "code",
-
+        "title_en",
+        "title_id",
+        "desc_en",
+        "desc_id",
+        "semester",
+        "theory_credit",
+        "non_theory_credit",
+        "curriculum_id",
     ];
+
+    function lesson_plan()
+    {
+        return $this->hasOne(LessonPlan::class);
+    }
+
+    function clos()
+    {
+        return $this->hasManyThrough(CourseLearningOutcome::class, LessonPlan::class);
+    }
 }
