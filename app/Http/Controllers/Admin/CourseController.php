@@ -48,7 +48,6 @@ class CourseController extends Controller
         //
         $data = $request->all();
         $data["curriculum_id"] = $curriculum->id;
-//        dd($data, $request);
         Course::create($data);
         return redirect()->route("admin.curriculum.show", $curriculum->id);
     }
@@ -106,6 +105,6 @@ class CourseController extends Controller
     {
         //
         $course->delete();
-        return redirect()->back();
+        return redirect()->route("admin.curriculum.show", $curriculum->id);
     }
 }
