@@ -19,4 +19,9 @@ class CourseLearningOutcome extends Model
         "lesson_plan_id",
         "LO_id",
     ];
+
+    public function Topics()
+    {
+        return $this->hasMany(Topic::class, 'CLO_id', 'id');
+    }
 }

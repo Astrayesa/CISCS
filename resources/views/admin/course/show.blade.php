@@ -56,6 +56,64 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+
+    <!-- /.card -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Topics</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-append">
+                        <a href="{{ route('admin.curriculum.course.topic.create', [$curriculum->id, $course->id]) }}"
+                            class="btn btn-primary">Add Topic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-wrap w-100">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Indicator</th>
+                        <th>Start Week</th>
+                        <th>End Week</th>
+                        <th>Learning Method</th>
+                        <th>Percent to LO</th>
+                        <th>CLO</th>
+                        <th style="width: 15%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($topics as $topic)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $topic->title_en }}</td>
+                            <td>{{ $topic->indicator }}</td>
+                            <td>{{ $topic->start_week }}</td>
+                            <td>{{ $topic->end_week }}</td>
+                            <td>{{ $topic->learning_method }}</td>
+                            <td>{{ $topic->percent_to_LO }}</td>
+                            <td>{{ $topic->Clo->title_en }}</td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-append">
+                                        <a href="{{ route('admin.curriculum.course.topic.edit', [$curriculum->id, $course->id, $topic->id]) }}"
+                                            class="btn btn-warning">Edit</a>
+                                        <button type="button" onclick="deleteTopic({{ $topic->id }})" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
 @endsection
 
 @section('script')
@@ -72,6 +130,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`<form action="{{ route('admin.curriculum.course.clo.index', [$curriculum->id, $course->id]) }}/${id}" method="post"> @csrf @method("delete") </form>`)
+                        .appendTo('body').submit();
+                }
+            });
+        }
+
+        function deleteTopic(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`<form action="{{ route('admin.curriculum.course.topic.index', [$curriculum->id, $course->id]) }}/${id}" method="post"> @csrf @method("delete") </form>`)
                         .appendTo('body').submit();
                 }
             });

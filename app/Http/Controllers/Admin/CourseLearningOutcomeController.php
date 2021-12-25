@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseLearningOutcome;
 use App\Models\Curriculum;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class CourseLearningOutcomeController extends Controller

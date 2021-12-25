@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Curriculum;
+use App\Models\Topic;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -65,7 +66,8 @@ class CourseController extends Controller
         //
         $lessonPlan = $course->lesson_plan()->get();
         $clos = $course->clos()->get();
-        return view("admin.course.show", compact("curriculum", "course", "lessonPlan", "clos"));
+        $topics = Topic::all();
+        return view("admin.course.show", compact("curriculum", "course", "lessonPlan", "clos", "topics"));
     }
 
     /**
