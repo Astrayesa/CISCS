@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LessonPlan extends Model
 {
     use HasFactory, softDeletes;
+
+    function clos()
+    {
+        $this->hasMany(CourseLearningOutcome::class);
+    }
 }

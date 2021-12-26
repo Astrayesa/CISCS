@@ -14,4 +14,9 @@ class CourseLearningOutcomeEvaluation extends Model
         "CLO_id",
         "evaluation_id",
     ];
+
+    function evaluation()
+    {
+        return $this->belongsTo(Evaluation::class);
+    }
 }
