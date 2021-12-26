@@ -24,4 +24,9 @@ class CourseLearningOutcome extends Model
     {
         return $this->hasMany(Topic::class, 'CLO_id', 'id');
     }
+
+    public function Evaluations()
+    {
+        return $this->belongsToMany(Evaluation::class, 'course_learning_outcome_evaluations', 'CLO_id', 'evaluation_id');
+    }
 }

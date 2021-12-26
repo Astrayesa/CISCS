@@ -14,7 +14,7 @@ class TopicController extends Controller
     public function create(Curriculum $curriculum, Course $course)
     {
         $topic = null;
-        $clos = CourseLearningOutcome::all();
+        $clos = $course->clos;
         return view('admin.topic.create', compact("curriculum", "course", "clos", "topic"));
     }
 
@@ -27,7 +27,7 @@ class TopicController extends Controller
 
     public function edit(Curriculum $curriculum, Course $course, Topic $topic)
     {
-        $clos = CourseLearningOutcome::all();
+        $clos = $course->clos;
         return view('admin.topic.create', compact("curriculum", "course", "clos", "topic"));
     }
 

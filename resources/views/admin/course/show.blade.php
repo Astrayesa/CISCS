@@ -114,6 +114,61 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+
+    <!-- /.card -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Evaluations</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-append">
+                        <a href="{{ route('admin.curriculum.course.evaluation.create', [$curriculum->id, $course->id]) }}"
+                            class="btn btn-primary">Add Evaluation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-wrap w-100">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>File</th>
+                        <th>Type</th>
+                        <th>Percent to Graduate CLO</th>
+                        <th>CLO</th>
+                        <th style="width: 15%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($evaluations as $evaluation)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><a href="{{ asset('storage/' . $evaluation->file) }}" target="_blank">Open File</a></td>
+                            <td>{{ $evaluation->type }}</td>
+                            <td>{{ $evaluation->percent_to_graduate_CLO }}</td>
+                            <td>@foreach ($evaluation->clos as $e_clo)
+                                <span class="badge badge-secondary">{{ $e_clo->title_en }}</span>
+                            @endforeach
+                            </td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-append">
+                                        <a href="{{ route('admin.curriculum.course.evaluation.edit', [$curriculum->id, $course->id, $evaluation->id]) }}"
+                                            class="btn btn-warning">Edit</a>
+                                        <button type="button" onclick="deleteTopic({{ $evaluation->id }})" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
 @endsection
 
 @section('script')

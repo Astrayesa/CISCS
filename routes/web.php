@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CourseLearningOutcomeController;
 use App\Http\Controllers\Admin\CurriculumController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\EvaluationController;
 use App\Http\Controllers\Admin\GraduateProfileController;
 use App\Http\Controllers\Admin\LearningOutcomeController;
 use App\Http\Controllers\Admin\TopicController;
@@ -35,6 +36,7 @@ Route::prefix("/admin")->name('admin.')->group(function () {
         Route::resource("curriculum.course", CourseController::class);
         Route::resource("curriculum.course.clo", CourseLearningOutcomeController::class);
         Route::resource("curriculum.course.topic", TopicController::class);
+        Route::resource("curriculum.course.evaluation", EvaluationController::class);
         Route::resource("curriculum.lo", LearningOutcomeController::class)->parameter("lo", "learningOutcome");
         Route::resource("curriculum.gp", GraduateProfileController::class)->parameter("gp", "graduateProfile");
         Route::resource("user", UserController::class);
