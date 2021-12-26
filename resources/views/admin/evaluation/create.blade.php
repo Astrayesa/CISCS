@@ -28,6 +28,7 @@
             @csrf
             @if ($evaluation)
                 @method("PATCH")
+                <input type="hidden" name="oldfile" id="oldfile" value="{{ $evaluation->file }}">
             @endif
             <div class="card-body">
                 <div class="row">
@@ -59,9 +60,15 @@
                                 <select class="select2 form-control" multiple="multiple" data-placeholder="Select CLO"
                                     data-dropdown-css-class="select2-blue" name="CLO_id[]">
                                     @foreach ($clos as $clo)
-                                        <option value="{{ $clo->id }}" @if ($evaluation != null && $evaluation->CLO_id == $clo->id) selected @endif>
-                                            {{ $clo->title_en }}
-                                        </option>
+                                        <option value="{{ $clo->id }}" @if ($evaluation != null)
+                                            @foreach ($evaluation->clos as $e_clo)
+                                                @if ($e_clo->id == $clo->id)
+                                                    selected
+                                                @endif
+                                            @endforeach
+                                    @endif>
+                                    {{ $clo->title_en }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -79,9 +86,11 @@
 
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.select2').select2();
+            bsCustomFileInput.init();
         });
     </script>
 @endsection

@@ -8,6 +8,7 @@ use App\Models\CourseLearningOutcomeEvaluation;
 use App\Models\Curriculum;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EvaluationController extends Controller
 {
@@ -32,5 +33,45 @@ class EvaluationController extends Controller
             ]);
         }
         return redirect(route("admin.curriculum.course.show", [$curriculum->id, $course->id]));
+    }
+
+    public function edit(Curriculum $curriculum, Course $course, Evaluation $evaluation)
+    {
+        $clos = $course->clos;
+        return view('admin.evaluation.create', compact("curriculum", "course", "clos", "evaluation"));
+    }
+
+    public function update(Request $request, Curriculum $curriculum, Course $course, Evaluation $evaluation)
+    {
+        $data = $request->all();
+        if($request->file('file')){
+            if($request->oldfile){
+                Storage::disk('public')->delete($evaluation->file);
+            }
+            $filename = "evaluation-" . time() . "." . $request->file("file")->getClientOriginalExtension();
+            $data["file"] = $request->file("file")->storeAs("evaluation_file", $filename, "public");
+        }
+        $evaluation->update($data);
+
+        CourseLearningOutcomeEvaluation::where('evaluation_id', $evaluation->id)->forceDelete();
+        if($request->CLO_id){
+            foreach ($data['CLO_id'] as $clo_id) {
+                CourseLearningOutcomeEvaluation::create([
+                    'CLO_id' => $clo_id,
+                    'evaluation_id' => $evaluation->id
+                ]);
+            }
+        }
+        return redirect(route("admin.curriculum.course.show", [$curriculum->id, $course->id]));
+    }
+
+    public function destroy(Curriculum $curriculum, Course $course, Evaluation $evaluation)
+    {
+        if($evaluation->file){
+            Storage::disk('public')->delete($evaluation->file);
+        }
+        CourseLearningOutcomeEvaluation::where('evaluation_id', $evaluation->id)->forceDelete();
+        $evaluation->delete();
+        return redirect()->back();
     }
 }

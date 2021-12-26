@@ -157,7 +157,7 @@
                                     <div class="input-group-append">
                                         <a href="{{ route('admin.curriculum.course.evaluation.edit', [$curriculum->id, $course->id, $evaluation->id]) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <button type="button" onclick="deleteTopic({{ $evaluation->id }})" class="btn btn-danger">Delete</button>
+                                        <button type="button" onclick="deleteEval({{ $evaluation->id }})" class="btn btn-danger">Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -202,6 +202,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $(`<form action="{{ route('admin.curriculum.course.topic.index', [$curriculum->id, $course->id]) }}/${id}" method="post"> @csrf @method("delete") </form>`)
+                        .appendTo('body').submit();
+                }
+            });
+        }
+
+        function deleteEval(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`<form action="{{ route('admin.curriculum.course.evaluation.index', [$curriculum->id, $course->id]) }}/${id}" method="post"> @csrf @method("delete") </form>`)
                         .appendTo('body').submit();
                 }
             });
