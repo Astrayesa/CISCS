@@ -66,7 +66,7 @@ class CourseController extends Controller
         //
         $lessonPlan = $course->lesson_plan()->get();
         $clos = $course->clos()->get();
-        // return $clos;
+        return $course->clos()->with('Topics')->get();
         // return $course->clos()->with(['Topics', 'Evaluations'])->get();
         $topics = Topic::all();
         $evaluations = Evaluation::all();
