@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\CourseLearningOutcomeEvaluation;
 use App\Models\Curriculum;
-use App\Models\Evaluation;
 use App\Models\Topic;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -66,10 +66,9 @@ class CourseController extends Controller
         //
         $lessonPlan = $course->lesson_plan()->get();
         $clos = $course->clos()->get();
-        // return $clos;
-        // return $course->clos()->with(['Topics', 'Evaluations'])->get();
-        $topics = Topic::all();
-        $evaluations = Evaluation::all();
+        $clos_id = $clos->pluck("id")->toArray();
+        $topics = Topic::where("CLO_id", "=", $clos_id)->get();
+        $evaluations = CourseLearningOutcomeEvaluation::where("CLO_id", "=", $clos_id)->with("evaluation")->get()->pluck("evaluation");
         return view("admin.course.show", compact("curriculum", "course", "lessonPlan", "clos", "topics", "evaluations"));
     }
 

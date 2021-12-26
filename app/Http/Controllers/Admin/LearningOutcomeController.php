@@ -55,7 +55,7 @@ class LearningOutcomeController extends Controller
      * Display the specified resource.
      *
      * @param LearningOutcome $learningOutcome
-     * @return Response
+     * @return array
      */
     public function show(Curriculum $curriculum, LearningOutcome $learningOutcome)
     {
