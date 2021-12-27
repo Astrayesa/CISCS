@@ -46,18 +46,18 @@
                                    value="{{ $department ? $department->name_id : "" }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="department_established">Department Establishment ID</label>
+                            <label for="department_established">Department Establishment Number</label>
                             <input type="text" class="form-control" id="department_established"
-                                   placeholder="Enter Department Establishment ID" name="establishment_cert_num"
+                                   placeholder="Enter Department Establishment Number" name="establishment_cert_num"
                                    required
                                    value="{{ $department ? $department->establishment_cert_num : "" }}"/>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="department_accreditation">Department Accreditation ID</label>
+                            <label for="department_accreditation">Department Accreditation Number</label>
                             <input type="text" class="form-control" id="department_accreditation"
-                                   placeholder="Enter Department Accreditation ID" name="accreditation_cert_num"
+                                   placeholder="Enter Department Accreditation Number" name="accreditation_cert_num"
                                    required
                                    value="{{ $department ? $department->accreditation_cert_num : "" }}"/>
                         </div>
@@ -66,7 +66,7 @@
                             <select class="custom-select" id="department_ranking" name="accreditation_ranking">
                                 @if($department != null)
                                     <option value="-" @if($department->accreditation_ranking == "-") selected @endif>
-                                        Not Available
+                                        Not Accredited
                                     </option>
                                     <option value="A" @if($department->accreditation_ranking == "A") selected @endif>
                                         A
@@ -96,7 +96,7 @@
                                 <div class="custom-file">
                                     <input type="file" accept="application/pdf" class="custom-file-input"
                                            id="accreditation-file-upload"
-                                           name="accreditation_file"/>
+                                           name="accreditation_file" @if($department == null) required @endif/>
                                     <label class="custom-file-label" for="accreditation-file-upload">Choose File</label>
                                 </div>
                             </div>

@@ -24,6 +24,12 @@
                                 </h1>
                             </div>
                             <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    @yield("breadcrumb")
+                                </ol>
+                            </div>
+                            <!-- /.col -->
                         </div>
                         <!-- /.row -->
                     </div>
@@ -34,6 +40,7 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
+                        @include("admin.layouts.feedback")
                         @yield('content')
                     </div>
                     <!-- /.container-fluid -->
