@@ -50,17 +50,22 @@ class CurriculumController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: validation
+        $request->validate([
+            "year" => "required|numeric|digits:4",
+            "name_en" => "required|string|max:100",
+            "name_id" => "required|string|max:100",
+            "department_id" => "required|exists:departments,id"
+        ]);
         $data = $request->all();
         Curriculum::create($data);
-        return redirect()->route("admin.curriculum.index");
+        return redirect()->route("admin.curriculum.index")->with("success", "Data created successfully");
     }
 
     /**
      * Display the specified resource.
      *
      * @param Curriculum $curriculum
-     * @return string
+     * @return Application|Factory|View
      */
     public function show(Curriculum $curriculum)
     {
@@ -95,9 +100,14 @@ class CurriculumController extends Controller
     public function update(Request $request, Curriculum $curriculum)
     {
         //
+        $request->validate([
+            "year" => "required|numeric|digits:4",
+            "name_en" => "required|string|max:100",
+            "name_id" => "required|string|max:100",
+            "department_id" => "required|exists:departments,id"
+        ]);
         $curriculum->update($request->all());
-
-        return redirect()->route("admin.curriculum.index");
+        return redirect()->route("admin.curriculum.index")->with("success", "Data updated successfully");
     }
 
     /**
@@ -110,6 +120,6 @@ class CurriculumController extends Controller
     {
         //
         $curriculum->delete();
-        return redirect()->route("admin.curriculum.index");
+        return redirect()->route("admin.curriculum.index")->with("success", "Data deleted successfully");
     }
 }

@@ -12,7 +12,7 @@
     <a href="{{ route('admin.curriculum.create') }}" class="btn btn-primary mb-3">
         <i class="fas fa-plus" aria-hidden="true"></i> Add Curriculum
     </a>
-    <table id="data_table" class="table width-100">
+    <table id="data_table" class="table text-wrap width-100 ">
         <thead>
         <tr>
             <th>No</th>

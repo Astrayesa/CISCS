@@ -4,6 +4,13 @@
     {{ $course->title_en }} Course
 @endsection
 
+
+@section("breadcrumb")
+    <li class="breadcrumb-item"><a href="{{ route("admin.curriculum.show", $curriculum->id) }}">Curriculum</a></li>
+    <li class="breadcrumb-item"><a
+                href="{{ route("admin.curriculum.course.show", [$curriculum->id, $course]) }}">Course</a></li>
+@endsection
+
 @section('content')
     <!-- /.card -->
     <div class="card mb-4">
@@ -13,7 +20,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-append">
                         <a href="{{ route('admin.curriculum.course.clo.create', [$curriculum->id, $course->id]) }}"
-                            class="btn btn-primary">Add Course Learning Outcome</a>
+                           class="btn btn-primary">Add Course Learning Outcome</a>
                     </div>
                 </div>
             </div>
@@ -22,32 +29,34 @@
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-wrap w-100">
                 <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th style="width: 20%">Percentage to Graduate</th>
-                        <th style="width: 15%">Action</th>
-                    </tr>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th style="width: 20%">Percentage to Graduate</th>
+                    <th style="width: 15%">Action</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clos as $lo)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $lo->title_en }}</td>
-                            <td>{{ $lo->desc_en }}</td>
-                            <td>{{ $lo->percent_to_graduate_LO }}%</td>
-                            <td>
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-append">
-                                        <a href="{{ route('admin.curriculum.course.clo.edit', [$curriculum->id, $course->id, $lo->id]) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <button type="button" onclick="deleteData({{ $lo->id }})" class="btn btn-danger">Delete</button>
-                                    </div>
+                @foreach ($clos as $lo)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $lo->title_en }}</td>
+                        <td>{{ $lo->desc_en }}</td>
+                        <td>{{ $lo->percent_to_graduate_LO }}%</td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-append">
+                                    <a href="{{ route('admin.curriculum.course.clo.edit', [$curriculum->id, $course->id, $lo->id]) }}"
+                                       class="btn btn-warning">Edit</a>
+                                    <button type="button" onclick="deleteData({{ $lo->id }})" class="btn btn-danger">
+                                        Delete
+                                    </button>
                                 </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -63,7 +72,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-append">
                         <a href="{{ route('admin.curriculum.course.topic.create', [$curriculum->id, $course->id]) }}"
-                            class="btn btn-primary">Add Topic</a>
+                           class="btn btn-primary">Add Topic</a>
                     </div>
                 </div>
             </div>
@@ -72,40 +81,42 @@
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-wrap w-100">
                 <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Title</th>
-                        <th>Indicator</th>
-                        <th>Start Week</th>
-                        <th>End Week</th>
-                        <th>Learning Method</th>
-                        <th>Percent to LO</th>
-                        <th>CLO</th>
-                        <th style="width: 15%">Action</th>
-                    </tr>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Indicator</th>
+                    <th>Start Week</th>
+                    <th>End Week</th>
+                    <th>Learning Method</th>
+                    <th>Percent to LO</th>
+                    <th>CLO</th>
+                    <th style="width: 15%">Action</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($topics as $topic)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $topic->title_en }}</td>
-                            <td>{{ $topic->indicator }}</td>
-                            <td>{{ $topic->start_week }}</td>
-                            <td>{{ $topic->end_week }}</td>
-                            <td>{{ $topic->learning_method }}</td>
-                            <td>{{ $topic->percent_to_LO }}</td>
-                            <td>{{ $topic->Clo->title_en }}</td>
-                            <td>
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-append">
-                                        <a href="{{ route('admin.curriculum.course.topic.edit', [$curriculum->id, $course->id, $topic->id]) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <button type="button" onclick="deleteTopic({{ $topic->id }})" class="btn btn-danger">Delete</button>
-                                    </div>
+                @foreach ($topics as $topic)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $topic->title_en }}</td>
+                        <td>{{ $topic->indicator }}</td>
+                        <td>{{ $topic->start_week }}</td>
+                        <td>{{ $topic->end_week }}</td>
+                        <td>{{ $topic->learning_method }}</td>
+                        <td>{{ $topic->percent_to_LO }}</td>
+                        <td>{{ $topic->Clo->title_en }}</td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-append">
+                                    <a href="{{ route('admin.curriculum.course.topic.edit', [$curriculum->id, $course->id, $topic->id]) }}"
+                                       class="btn btn-warning">Edit</a>
+                                    <button type="button" onclick="deleteTopic({{ $topic->id }})"
+                                            class="btn btn-danger">Delete
+                                    </button>
                                 </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -121,7 +132,7 @@
                 <div class="input-group input-group-sm">
                     <div class="input-group-append">
                         <a href="{{ route('admin.curriculum.course.evaluation.create', [$curriculum->id, $course->id]) }}"
-                            class="btn btn-primary">Add Evaluation</a>
+                           class="btn btn-primary">Add Evaluation</a>
                     </div>
                 </div>
             </div>
@@ -130,37 +141,39 @@
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-wrap w-100">
                 <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>File</th>
-                        <th>Type</th>
-                        <th>Percent to Graduate CLO</th>
-                        <th>CLO</th>
-                        <th style="width: 15%">Action</th>
-                    </tr>
+                <tr>
+                    <th>No</th>
+                    <th>File</th>
+                    <th>Type</th>
+                    <th>Percent to Graduate CLO</th>
+                    <th>CLO</th>
+                    <th style="width: 15%">Action</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($evaluations as $evaluation)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td><a href="{{ asset('storage/' . $evaluation->file) }}" target="_blank">Open File</a></td>
-                            <td>{{ $evaluation->type }}</td>
-                            <td>{{ $evaluation->percent_to_graduate_CLO }}</td>
-                            <td>@foreach ($evaluation->clos as $e_clo)
+                @foreach ($evaluations as $evaluation)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td><a href="{{ asset('storage/' . $evaluation->file) }}" target="_blank">Open File</a></td>
+                        <td>{{ $evaluation->type }}</td>
+                        <td>{{ $evaluation->percent_to_graduate_CLO }}</td>
+                        <td>@foreach ($evaluation->clos as $e_clo)
                                 <span class="badge badge-secondary">{{ $e_clo->title_en }}</span>
                             @endforeach
-                            </td>
-                            <td>
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-append">
-                                        <a href="{{ route('admin.curriculum.course.evaluation.edit', [$curriculum->id, $course->id, $evaluation->id]) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <button type="button" onclick="deleteEval({{ $evaluation->id }})" class="btn btn-danger">Delete</button>
-                                    </div>
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-append">
+                                    <a href="{{ route('admin.curriculum.course.evaluation.edit', [$curriculum->id, $course->id, $evaluation->id]) }}"
+                                       class="btn btn-warning">Edit</a>
+                                    <button type="button" onclick="deleteEval({{ $evaluation->id }})"
+                                            class="btn btn-danger">Delete
+                                    </button>
                                 </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

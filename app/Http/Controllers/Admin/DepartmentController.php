@@ -23,7 +23,6 @@ class DepartmentController extends Controller
     {
         //
         $data = Department::all();
-//        return view("admin.layouts.main", compact("data"));
         return view("admin.department.index", compact("data"));
 
     }
@@ -48,13 +47,21 @@ class DepartmentController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // TODO: validation
+        $request->validate([
+            "code" => "required|max:20",
+            "name_en" => "required|string|max:100",
+            "name_id" => "required|string|max:100",
+            "establishment_cert_num" => "required|string|max:50",
+            "accreditation_cert_num" => "required|string|max:50",
+            "accreditation_ranking" => "required|string|max:4",
+            "accreditation_file" => "required|file|mimes:pdf|max:1024"
+        ]);
         $data = $request->all();
         $filename = "department-" . time() . "." . $request->file("accreditation_file")->getClientOriginalExtension();
         $file_path = $request->file("accreditation_file")->storeAs("accreditation_file", $filename, "public");
         $data["accreditation_file"] = $file_path;
         Department::create($data);
-        return redirect()->route("admin.department.index");
+        return redirect()->route("admin.department.index")->with("success", "Data created successfully");
     }
 
     /**
@@ -90,13 +97,22 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        // TODO: validation
+        $request->validate([
+            "code" => "required|max:20",
+            "name_en" => "required|string|max:100",
+            "name_id" => "required|string|max:100",
+            "establishment_cert_num" => "required|string|max:50",
+            "accreditation_cert_num" => "required|string|max:50",
+            "accreditation_ranking" => "required|string|max:4"
+        ]);
         $data = $request->all();
-        $filename = "department-" . time() . "." . $request->file("accreditation_file")->getClientOriginalExtension();
-        $file_path = $request->file("accreditation_file")->storeAs("accreditation_file", $filename, "public");
-        $data["accreditation_file"] = $file_path;
+        if (array_key_exists("accreditation_file", $data)) {
+            $filename = "department-" . time() . "." . $request->file("accreditation_file")->getClientOriginalExtension();
+            $file_path = $request->file("accreditation_file")->storeAs("accreditation_file", $filename, "public");
+            $data["accreditation_file"] = $file_path;
+        }
         $department->update($data);
-        return redirect()->route("admin.department.index");
+        return redirect()->route("admin.department.index")->with("success", "Data updated successfully");
     }
 
     /**
@@ -107,8 +123,7 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        // TODO: delete file
         $department->delete();
-        return redirect()->route("admin.department.index");
+        return redirect()->route("admin.department.index")->with("success", "Data deleted successfully");
     }
 }

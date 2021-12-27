@@ -15,12 +15,12 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string("code");
-            $table->string("name_en");
-            $table->string("name_id");
-            $table->string("establishment_cert_num");
-            $table->string("accreditation_cert_num");
-            $table->string("accreditation_ranking");
+            $table->string("code", 20);
+            $table->string("name_en", 100);
+            $table->string("name_id", 100);
+            $table->string("establishment_cert_num", 50);
+            $table->string("accreditation_cert_num", 50);
+            $table->string("accreditation_ranking", 4);
             $table->string("accreditation_file");
 
             $table->timestamps();

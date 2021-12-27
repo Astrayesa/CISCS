@@ -1,7 +1,15 @@
 @extends("admin.layouts.main")
 
+@section("header")
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+@endsection
+
 @section("page_name")
     Curriculum {{ $curriculum->name_en }} at {{ $curriculum->department->name_en }} Department
+@endsection
+
+@section("breadcrumb")
+    <li class="breadcrumb-item"><a href="{{ route("admin.curriculum.show", $curriculum->id) }}">Curriculum</a></li>
 @endsection
 
 @section("content")
@@ -19,7 +27,7 @@
             </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
+        <div class="card-body table-responsive">
             <table class="table table-hover text-wrap w-100">
                 <thead>
                 <tr>
@@ -78,7 +86,7 @@
             </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
+        <div class="card-body table-responsive">
             <table class="table table-hover text-wrap w-100">
                 <thead>
                 <tr>
@@ -133,7 +141,7 @@
             </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
+        <div class="card-body table-responsive">
             <table class="table table-hover text-wrap w-100">
                 <thead>
                 <tr>
@@ -174,4 +182,49 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+@endsection
+
+@section("script")
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function setCurriculum(curriculum_id) {
+            fetch("{{ route('admin.curriculum.index') }}/" + curriculum_id)
+                .then(response => response.json())
+                .then(({
+                           year,
+                           name_en,
+                           name_id,
+                           department
+                       }) => {
+                    $('#curriculum_year').text(year);
+                    $('#curriculum_name_en').text(name_en);
+                    $('#curriculum_name_id').text(name_id);
+                    $('#curriculum_department').text(department.name_en);
+                })
+        }
+
+        $("table").DataTable({
+            "responsive": true, "lengthChange": false, "filter": true
+        });
+
+        function deleteData(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('<form action="{{ route('admin.curriculum.index') }}/' + id +
+                        '" method="post"> @csrf @method("delete") </form>').appendTo('body').submit();
+                }
+            });
+        }
+    </script>
 @endsection

@@ -17,8 +17,8 @@ class CreateCurriculaTable extends Migration
             $table->id();
             $table->year("year");
 
-            $table->string("name_en");
-            $table->string("name_id");
+            $table->string("name_en", 100);
+            $table->string("name_id", 100);
 
             $table->unsignedBigInteger("department_id");
             $table->foreign("department_id")->on("departments")->references("id");
