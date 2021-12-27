@@ -38,11 +38,6 @@ class CourseLearningOutcomeController extends Controller
         return redirect()->route("admin.curriculum.course.show", [$curriculum->id, $course->id]);
     }
 
-    public function show(Curriculum $curriculum, Course $course, CourseLearningOutcome $clo)
-    {
-        return view("admin.course_learning_outcome.show", compact("curriculum", "course", "clo"));
-    }
-
     public function destroy(Curriculum $curriculum, Course $course, CourseLearningOutcome $clo)
     {
         $clo->delete();

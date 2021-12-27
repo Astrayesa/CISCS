@@ -40,8 +40,6 @@
                             <td>
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-append">
-                                        <a href="{{ route('admin.curriculum.course.clo.show', [$curriculum->id, $course->id, $lo->id]) }}"
-                                            class="btn btn-success">Show</a>
                                         <a href="{{ route('admin.curriculum.course.clo.edit', [$curriculum->id, $course->id, $lo->id]) }}"
                                             class="btn btn-warning">Edit</a>
                                         <button type="button" onclick="deleteData({{ $lo->id }})" class="btn btn-danger">Delete</button>
