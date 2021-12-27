@@ -4,7 +4,7 @@
             <footer class="pt-5 pb-3">
                 <div class="row">
                     <div class="col-6">
-                        <h5>HUBUNGI KAMI</h5>
+                        <h5>ABOUT US</h5>
                         <hr class="dropdown-divider">
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2">
@@ -29,45 +29,33 @@
                     </div>
 
                     <div class="col-3">
-                        <h5>MENU</h5>
+                        <h5>MENUS</h5>
                         <hr class="dropdown-divider">
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Jurusan</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Data Dosen</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Data Mahasiswa</a>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Departmens</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Curriculums</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Courses</a>
                             </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">e-jurnal</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Layanan Mahasiswa</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Agenda Pimpinan</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sitemap</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Graduate Profiles</a></li>
                         </ul>
                     </div>
 
                     <div class="col-3">
-                        <h5>TAUTAN</h5>
+                        <h5>LINKS</h5>
                         <hr class="dropdown-divider">
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Universitas
+                            <li class="nav-item mb-2"><a href="https://www.unila.ac.id" target="_blank" class="nav-link p-0 text-muted">Universitas
                                     Lampung</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Siakad</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sister</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Kemenristekdikti</a>
+                            <li class="nav-item mb-2"><a href="https://siakadu.unila.ac.id/" target="_blank" class="nav-link p-0 text-muted">Siakad</a></li>
+                            <li class="nav-item mb-2"><a href="http://sister.unila.ac.id" target="_blank" class="nav-link p-0 text-muted">Sister</a></li>
                             </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">PDDIKTI</a></li>
+                            <li class="nav-item mb-2"><a href="https://forlap.ristekdikti.go.id/" target="_blank" class="nav-link p-0 text-muted">PDDIKTI</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-between pt-4 border-top">
                     <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-                    <ul class="list-unstyled d-flex text-muted">
-                        <li class="ms-3">
-                            <p><i class="fas fa-rss"></i> Designed by <a href="https://www.github.com/BrondoL"
-                                    target="_blank" class="text-decoration-none text-muted">BrondoL</a></p>
-                        </li>
-                    </ul>
                 </div>
             </footer>
         </div>
