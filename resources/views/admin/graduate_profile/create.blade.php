@@ -4,6 +4,10 @@
     Graduate Profile
 @endsection
 
+@section('header')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+@endsection
+
 @section("content")
     <div class="col-md-2 mb-3">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">
@@ -52,6 +56,28 @@
                                    placeholder="Enter Graduate Profile Aspect" name="aspect" required
                                    value="{{ $graduateProfile ? $graduateProfile->aspect : "" }}"/>
                         </div>
+
+                        <div class="form-group">
+                            <label>GP Course</label>
+                            <div class="select2-blue">
+                                <select class="select2 form-control" multiple="multiple"
+                                        data-placeholder="Select courses"
+                                        data-dropdown-css-class="select2-blue" name="course_id[]">
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}"
+                                                @if ($graduateProfile != null)
+                                                @foreach ($graduateProfile->courses as $gp_course)
+                                                @if ($gp_course->id == $course->id)
+                                                selected
+                                                @endif
+                                                @endforeach
+                                                @endif>
+                                            {{ $course->title_en }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,4 +88,14 @@
             </div>
         </form>
     </div>
+@endsection
+
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
 @endsection

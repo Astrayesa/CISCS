@@ -35,7 +35,8 @@ class CourseController extends Controller
     {
         //
         $course = null;
-        return view("admin.course.create", compact("curriculum", "course"));
+        $lessonPlan = null;
+        return view("admin.course.create", compact("curriculum", "course", "lessonPlan"));
     }
 
     /**
@@ -48,10 +49,24 @@ class CourseController extends Controller
     public function store(Request $request, Curriculum $curriculum)
     {
         //
+        $request->validate([
+            "code" => "required|string|max:20",
+            "title_en" => "required|string|max:100",
+            "title_id" => "required|string|max:100",
+            "desc_en" => "required|string|max:255",
+            "desc_id" => "required|string|max:255",
+            "semester" => "required|integer|max:8",
+            "theory_credit" => "required|integer|max:8",
+            "non_theory_credit" => "required|integer|max:8",
+            "developer_name" => "required|string|max:100",
+            "reference" => "required"
+        ]);
         $data = $request->all();
         $data["curriculum_id"] = $curriculum->id;
-        Course::create($data);
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        $course = Course::create($data);
+        $course->lesson_plan()->create($data);
+
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data created successfully");
     }
 
     /**
@@ -82,7 +97,8 @@ class CourseController extends Controller
     public function edit(Curriculum $curriculum, Course $course)
     {
         //
-        return view("admin.course.create", compact("curriculum", "course"));
+        $lessonPlan = $course->lesson_plan()->first();
+        return view("admin.course.create", compact("curriculum", "course", "lessonPlan"));
     }
 
     /**
@@ -96,20 +112,32 @@ class CourseController extends Controller
     public function update(Request $request, Curriculum $curriculum, Course $course)
     {
         //
+        $request->validate([
+            "code" => "required|string|max:20",
+            "title_en" => "required|string|max:100",
+            "title_id" => "required|string|max:100",
+            "desc_en" => "required|string|max:255",
+            "desc_id" => "required|string|max:255",
+            "semester" => "required|integer|max:8",
+            "theory_credit" => "required|integer|max:8",
+            "non_theory_credit" => "required|integer|max:8",
+        ]);
         $course->update($request->all());
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param Curriculum $curriculum
      * @param Course $course
      * @return RedirectResponse
      */
     public function destroy(Curriculum $curriculum, Course $course)
     {
         //
+        $course->lesson_plan()->delete();
         $course->delete();
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data deleted successfully");
     }
 }

@@ -15,7 +15,7 @@ class CreateLessonPlansTable extends Migration
     {
         Schema::create('lesson_plans', function (Blueprint $table) {
             $table->id();
-            $table->string("developer_name");
+            $table->string("developer_name", 100);
             $table->text("reference");
 
             $table->unsignedBigInteger("course_id");

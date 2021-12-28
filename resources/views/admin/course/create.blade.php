@@ -1,5 +1,9 @@
 @extends("admin.layouts.main")
 
+@section("header")
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+@endsection
+
 @section("page_title")
     Course
 @endsection
@@ -78,6 +82,17 @@
                                    placeholder="Enter Course Non-theory Credit" name="non_theory_credit" required
                                    value="{{ $course ? $course->non_theory_credit : "" }}"/>
                         </div>
+                        <div class="form-group">
+                            <label for="lesson_plan_dev">Lesson Plan Developer</label>
+                            <input type="text" class="form-control" id="lesson_plan_dev"
+                                   placeholder="Enter Lesson Plan Developer" name="developer_name" required
+                                   value="{{ $lessonPlan ? $lessonPlan->developer_name : "" }}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="reference">Reference</label> <br/>
+                            <textarea id="reference" name="reference"
+                                      required>{{ $lessonPlan ? $lessonPlan->reference : "" }}</textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,4 +103,16 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section("script")
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $("textarea").summernote({
+            toolbar: [
+                ["font", ["bold", "underline", "clear"]],
+                ["para", ["ul", "ol", "paragraph"]],
+            ]
+        });
+    </script>
 @endsection

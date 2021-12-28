@@ -40,6 +40,7 @@ class LearningOutcomeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param Curriculum $curriculum
      * @return RedirectResponse
      */
     public function store(Request $request, Curriculum $curriculum)
@@ -54,18 +55,20 @@ class LearningOutcomeController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Curriculum $curriculum
      * @param LearningOutcome $learningOutcome
-     * @return array
+     * @return LearningOutcome
      */
     public function show(Curriculum $curriculum, LearningOutcome $learningOutcome)
     {
         //
-        return compact("curriculum", "learningOutcome");
+        return $learningOutcome;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param Curriculum $curriculum
      * @param LearningOutcome $learningOutcome
      * @return Application|Factory|View|Response
      */
@@ -79,6 +82,7 @@ class LearningOutcomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
+     * @param Curriculum $curriculum
      * @param LearningOutcome $learningOutcome
      * @return RedirectResponse
      */
@@ -92,6 +96,7 @@ class LearningOutcomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Curriculum $curriculum
      * @param LearningOutcome $learningOutcome
      * @return RedirectResponse
      */

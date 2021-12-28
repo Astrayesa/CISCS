@@ -10,6 +10,12 @@ class LessonPlan extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $fillable = [
+        "developer_name",
+        "reference",
+        "course_id",
+    ];
+
     function clos()
     {
         $this->hasMany(CourseLearningOutcome::class);
