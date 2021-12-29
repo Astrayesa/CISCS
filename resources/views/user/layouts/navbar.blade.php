@@ -11,23 +11,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route("home") }}">Home</a>
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('jurusan') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Departmens
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Computer Science</a></li>
-                        <li><a class="dropdown-item" href="#">Informatics Management</a></li>
+                        @foreach ($departments as $department)
+                            <li><a class="dropdown-item" href="{{ route("jurusan", $department->id) }}">{{ $department->name_en }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Curriculums</a>
+                    <a class="nav-link {{ request()->routeIs('kurikulums') ? 'active' : '' }}" href="{{ route("kurikulums") }}">Curriculums</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Courses</a>
+                    <a class="nav-link {{ request()->routeIs('matkul') ? 'active' : '' }}" href="{{ route("matkul") }}">Courses</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Graduate Profiles</a>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LearningOutcomeController;
 use App\Http\Controllers\Admin\TopicController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +24,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/departments/{department}', [HomeController::class, 'showDepartment'])->name('jurusan');
+Route::get('/curriculums', [HomeController::class, 'listCurriculums'])->name('kurikulums');
+Route::get('/courses', [HomeController::class, 'listCourses'])->name('matkul');
 
 Route::prefix("/admin")->name('admin.')->group(function () {
     Route::middleware("auth")->group(function () {

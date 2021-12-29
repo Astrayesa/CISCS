@@ -24,7 +24,6 @@ class CurriculumController extends Controller
         $data = Curriculum::with(["department" => function ($query) {
             $query->select("id", "name_en");
         }])->get();
-//        dd($data);
         return view("admin.curriculum.index", compact("data"));
     }
 

@@ -27,4 +27,9 @@ class Department extends Model
     {
         return "/storage/" . $value;
     }
+
+    public function Curriculums()
+    {
+        return $this->hasMany(Curriculum::class, 'department_id', 'id');
+    }
 }
