@@ -28,9 +28,15 @@ class HomeController extends Controller
 
     public function listCourses()
     {
-        $department = Department::with('Curriculums.courses')->first();
-        return $department;
+        $data = Department::with('Curriculums.courses.clos.Topics')->get();
         $departments = Department::all();
-        return view("user.curriculum", compact("departments"));
+        return view("user.course", compact("departments", "data"));
+    }
+
+    public function listGP()
+    {
+        $data = Department::with('Curriculums.graduateProfiles')->get();
+        $departments = Department::all();
+        return view("user.graduate_profiles", compact("departments", "data"));
     }
 }

@@ -31,7 +31,7 @@
                     <a class="nav-link {{ request()->routeIs('matkul') ? 'active' : '' }}" href="{{ route("matkul") }}">Courses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Graduate Profiles</a>
+                    <a class="nav-link {{ request()->routeIs('gp') ? 'active' : '' }}" href="{{ route("gp") }}">Graduate Profiles</a>
                 </li>
             </ul>
         </div>

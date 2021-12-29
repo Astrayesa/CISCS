@@ -28,6 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/departments/{department}', [HomeController::class, 'showDepartment'])->name('jurusan');
 Route::get('/curriculums', [HomeController::class, 'listCurriculums'])->name('kurikulums');
 Route::get('/courses', [HomeController::class, 'listCourses'])->name('matkul');
+Route::get('/graduate-profiles', [HomeController::class, 'listGP'])->name('gp');
 
 Route::prefix("/admin")->name('admin.')->group(function () {
     Route::middleware("auth")->group(function () {
