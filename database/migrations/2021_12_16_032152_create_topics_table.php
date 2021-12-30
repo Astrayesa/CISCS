@@ -16,12 +16,12 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
 
-            $table->string("title_en");
-            $table->string("title_id");
-            $table->text("indicator");
+            $table->string("title_en", 50);
+            $table->string("title_id", 50);
+            $table->text("indicator", 50);
             $table->unsignedTinyInteger("start_week");
             $table->unsignedTinyInteger("end_week");
-            $table->string("learning_method");
+            $table->string("learning_method", 50);
             $table->double("percent_to_LO");
 
             $table->unsignedBigInteger("CLO_id");

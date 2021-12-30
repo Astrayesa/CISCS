@@ -40,17 +40,24 @@ class GraduateProfileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param Curriculum $curriculum
      * @return RedirectResponse
      */
     public function store(Request $request, Curriculum $curriculum)
     {
         //
-        $data = $request->all();
+        $data = $request->validate([
+            "code" => "required|string|max:20",
+            "title_en" => "required|string|max:100",
+            "title_id" => "required|string|max:100",
+            "aspect" => "required|string|max:50",
+            "course_id.*" => "exists:courses,id"
+        ]);
         $data["curriculum_id"] = $curriculum->id;
         $gp = GraduateProfile::create($data);
-        $gp->courses()->attach($data["course_id"]);
-
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        $gp_course = array_key_exists("course_id", $data) ? $data["course_id"] : [];
+        $gp->courses()->attach($gp_course);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data created successfully");
     }
 
     /**
@@ -58,12 +65,12 @@ class GraduateProfileController extends Controller
      *
      * @param Curriculum $curriculum
      * @param GraduateProfile $graduateProfile
-     * @return array
+     * @return GraduateProfile
      */
     public function show(Curriculum $curriculum, GraduateProfile $graduateProfile)
     {
         //
-        return compact("curriculum", "graduateProfile");
+        return $graduateProfile;
     }
 
     /**
@@ -91,12 +98,18 @@ class GraduateProfileController extends Controller
     public function update(Request $request, Curriculum $curriculum, GraduateProfile $graduateProfile)
     {
         //
-        $data = $request->all();
+        $data = $request->validate([
+            "code" => "required|string|max:20",
+            "title_en" => "required|string|max:100",
+            "title_id" => "required|string|max:100",
+            "aspect" => "required|string|max:50",
+            "course_id.*" => "exists:courses,id"
+        ]);;
         $graduateProfile->update();
         $gp_course = array_key_exists("course_id", $data) ? $data["course_id"] : [];
 
         $graduateProfile->courses()->sync($gp_course);
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data updated successfully");
     }
 
     /**
@@ -110,6 +123,6 @@ class GraduateProfileController extends Controller
     {
         //
         $graduateProfile->delete();
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data deleted successfully");
     }
 }

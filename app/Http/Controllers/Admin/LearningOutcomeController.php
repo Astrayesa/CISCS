@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class LearningOutcomeController extends Controller
 {
@@ -46,10 +45,15 @@ class LearningOutcomeController extends Controller
     public function store(Request $request, Curriculum $curriculum)
     {
         //
-        $data = $request->all();
+        $data = $request->validate([
+            "title_en" => "required|string|max:50",
+            "title_id" => "required|string|max:50",
+            "desc_en" => "required|string|max:255",
+            "desc_id" => "required|string|max:255",
+        ]);
         $data["curriculum_id"] = $curriculum->id;
         LearningOutcome::create($data);
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data created successfully");
     }
 
     /**
@@ -70,7 +74,7 @@ class LearningOutcomeController extends Controller
      *
      * @param Curriculum $curriculum
      * @param LearningOutcome $learningOutcome
-     * @return Application|Factory|View|Response
+     * @return Application|Factory|View
      */
     public function edit(Curriculum $curriculum, LearningOutcome $learningOutcome)
     {
@@ -89,8 +93,14 @@ class LearningOutcomeController extends Controller
     public function update(Request $request, Curriculum $curriculum, LearningOutcome $learningOutcome)
     {
         //
-        $learningOutcome->update($request->all());
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        $data = $request->validate([
+            "title_en" => "required|string|max:50",
+            "title_id" => "required|string|max:50",
+            "desc_en" => "required|string|max:255",
+            "desc_id" => "required|string|max:255",
+        ]);
+        $learningOutcome->update($data);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data updated successfully");
     }
 
     /**
@@ -104,6 +114,6 @@ class LearningOutcomeController extends Controller
     {
         //
         $learningOutcome->delete();
-        return redirect()->route("admin.curriculum.show", $curriculum->id);
+        return redirect()->route("admin.curriculum.show", $curriculum->id)->with("success", "Data deleted successfully");
     }
 }

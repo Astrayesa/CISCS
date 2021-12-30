@@ -79,11 +79,17 @@ class CourseController extends Controller
     public function show(Curriculum $curriculum, Course $course)
     {
         //
-        $lessonPlan = $course->lesson_plan()->get();
-        $clos = $course->clos()->get();
+        $lessonPlan = $course->lesson_plan;
+
+//        $clos = $course->clos()->with("Topics", "Evaluations")->get();
+//        $topics = $clos->pluck("Topics")->toArray();
+//        $evaluations = $clos->pluck("Evaluations");
+
+        $clos = $course->clos;
         $clos_id = $clos->pluck("id")->toArray();
-        $topics = Topic::where("CLO_id", "=", $clos_id)->get();
-        $evaluations = CourseLearningOutcomeEvaluation::where("CLO_id", "=", $clos_id)->with("evaluation")->get()->pluck("evaluation");
+        $topics = Topic::whereIn("CLO_id", $clos_id)->get();
+        $evaluations = CourseLearningOutcomeEvaluation::whereIn("CLO_id", $clos_id)->select("evaluation_id")->distinct("evaluation_id")->with("evaluation")->get()->pluck("evaluation");
+
         return view("admin.course.show", compact("curriculum", "course", "lessonPlan", "clos", "topics", "evaluations"));
     }
 

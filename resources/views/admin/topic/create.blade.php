@@ -47,13 +47,13 @@
                         <div class="form-group">
                             <label for="start_week">Start Week</label>
                             <input type="number" class="form-control" id="start_week"
-                                placeholder="Enter Start Week" name="start_week" required
+                                placeholder="Enter Start Week" name="start_week" min="1" max="16" required
                                 value="{{ $topic ? $topic->start_week : '' }}" />
                         </div>
                         <div class="form-group">
                             <label for="end_week">End Week</label>
                             <input type="number" class="form-control" id="end_week"
-                                placeholder="Enter End Week" name="end_week" required
+                                placeholder="Enter End Week" name="end_week" min="1" max="16" required
                                 value="{{ $topic ? $topic->end_week : '' }}" />
                         </div>
                         <div class="form-group">
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label for="percent_to_LO">Percent to Learning Outcome</label>
-                            <input type="number" min="0" max="100" step="0.001" class="form-control"
+                            <input type="number" min="0" max="100" step="1" class="form-control"
                                 id="percent_to_LO" placeholder="Enter percentage"
                                 name="percent_to_LO" required
                                 value="{{ $topic ? $topic->percent_to_LO : '' }}" />

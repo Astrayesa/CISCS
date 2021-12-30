@@ -52,15 +52,10 @@
                         </div>
                         <div class="form-group">
                             <label for="percent_to_graduate_LO">Course Learning Outcome percentage</label>
-                            <input type="number" min="0" max="100" step="0.001" class="form-control"
+                            <input type="number" min="0" max="100" step="1" class="form-control"
                                 id="percent_to_graduate_LO" placeholder="Enter Course Learning Outcome percentage"
                                 name="percent_to_graduate_LO" required
                                 value="{{ $clo ? $clo->percent_to_graduate_LO : '' }}" />
-                        </div>
-                        <div class="form-group">
-                            <label for="lesson_plan_id">Lesson Plan</label>
-                            <input type="text" class="form-control" id="lesson_plan_id" name="lesson_plan_id"
-                                value="{{ $course->lesson_plan->developer_name . ' - ' . $course->lesson_plan->reference }}" readonly />
                         </div>
                         <div class="form-group">
                             <label for="LO_id">Learning Outcomes</label>

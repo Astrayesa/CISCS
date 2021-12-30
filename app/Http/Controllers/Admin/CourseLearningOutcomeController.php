@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseLearningOutcome;
 use App\Models\Curriculum;
-use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class CourseLearningOutcomeController extends Controller
@@ -19,10 +18,18 @@ class CourseLearningOutcomeController extends Controller
 
     public function store(Request $request, Curriculum $curriculum, Course $course)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            "title_en" => "required|string|max:50",
+            "title_id" => "required|string|max:50",
+            "desc_en" => "required|string|max:100",
+            "desc_id" => "required|string|max:100",
+            "percent_to_graduate_LO" => "required|numeric|min:0|max:100",
+            "LO_id" => "required|exists:learning_outcomes,id",
+        ]);
+
         $data["lesson_plan_id"] = $course->lesson_plan->id;
         CourseLearningOutcome::create($data);
-        return redirect()->route("admin.curriculum.course.show", [$curriculum->id, $course->id]);
+        return redirect()->route("admin.curriculum.course.show", [$curriculum->id, $course->id])->with("success", "Data created successfully");
     }
 
     public function edit(Curriculum $curriculum, Course $course, CourseLearningOutcome $clo)
@@ -32,15 +39,22 @@ class CourseLearningOutcomeController extends Controller
 
     public function update(Request $request, Curriculum $curriculum, Course $course, CourseLearningOutcome $clo)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            "title_en" => "required|string|max:50",
+            "title_id" => "required|string|max:50",
+            "desc_en" => "required|string|max:100",
+            "desc_id" => "required|string|max:100",
+            "percent_to_graduate_LO" => "required|numeric|min:0|max:100",
+            "LO_id" => "required|exists:learning_outcomes,id",
+        ]);
         $data["lesson_plan_id"] = $course->lesson_plan->id;
         $clo->update($data);
-        return redirect()->route("admin.curriculum.course.show", [$curriculum->id, $course->id]);
+        return redirect()->route("admin.curriculum.course.show", [$curriculum->id, $course->id])->with("success", "Data updated successfully");
     }
 
     public function destroy(Curriculum $curriculum, Course $course, CourseLearningOutcome $clo)
     {
         $clo->delete();
-        return redirect()->back();
+        return redirect()->back()->with("success", "Data updated successfully");
     }
 }

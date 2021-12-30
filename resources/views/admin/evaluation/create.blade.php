@@ -38,7 +38,7 @@
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" accept="application/pdf" class="custom-file-input" id="file"
-                                        name="file" />
+                                        name="file"/>
                                     <label class="custom-file-label" for="file">Choose File</label>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="percent_to_graduate_CLO">Percent to Graduate Course Learning Outcome</label>
-                            <input type="number" min="0" max="100" step="0.001" class="form-control"
+                            <input type="number" min="0" max="100" step="1" class="form-control"
                                 id="percent_to_graduate_CLO" placeholder="Enter percentage" name="percent_to_graduate_CLO"
                                 required value="{{ $evaluation ? $evaluation->percent_to_graduate_CLO : '' }}" />
                         </div>
@@ -80,6 +80,7 @@
                         <i class="fas fa-paper-plane"></i> Submit
                     </button>
                 </div>
+            </div>
         </form>
     </div>
 @endsection
