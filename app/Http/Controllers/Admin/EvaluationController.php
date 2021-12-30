@@ -21,17 +21,27 @@ class EvaluationController extends Controller
 
     public function store(Request $request, Curriculum $curriculum, Course $course)
     {
+        $request->validate([
+            "file" => "required|file",
+            "type" => "required|string",
+            "percent_to_graduate_CLO" => "required|numeric"
+        ]);
         $data = $request->all();
         $filename = "evaluation-" . time() . "." . $request->file("file")->getClientOriginalExtension();
         $file_path = $request->file("file")->storeAs("evaluation_file", $filename, "public");
         $data["file"] = $file_path;
+
         $evaluation = Evaluation::create($data);
-        foreach ($data['CLO_id'] as $clo_id) {
-            CourseLearningOutcomeEvaluation::create([
-                'CLO_id' => $clo_id,
-                'evaluation_id' => $evaluation->id
-            ]);
-        }
+        $evaluation_clos = array_key_exists("CLO_id", $data) ? $data["CLO_id"] : [];
+//        dd($evaluation_clos);
+        $evaluation->clos()->attach($evaluation_clos);
+
+//        foreach ($data['CLO_id'] as $clo_id) {
+//            CourseLearningOutcomeEvaluation::create([
+//                'CLO_id' => $clo_id,
+//                'evaluation_id' => $evaluation->id
+//            ]);
+//        }
         return redirect(route("admin.curriculum.course.show", [$curriculum->id, $course->id]));
     }
 
@@ -44,8 +54,8 @@ class EvaluationController extends Controller
     public function update(Request $request, Curriculum $curriculum, Course $course, Evaluation $evaluation)
     {
         $data = $request->all();
-        if($request->file('file')){
-            if($request->oldfile){
+        if ($request->file('file')) {
+            if ($request->oldfile) {
                 Storage::disk('public')->delete($evaluation->file);
             }
             $filename = "evaluation-" . time() . "." . $request->file("file")->getClientOriginalExtension();
@@ -54,7 +64,7 @@ class EvaluationController extends Controller
         $evaluation->update($data);
 
         CourseLearningOutcomeEvaluation::where('evaluation_id', $evaluation->id)->forceDelete();
-        if($request->CLO_id){
+        if ($request->CLO_id) {
             foreach ($data['CLO_id'] as $clo_id) {
                 CourseLearningOutcomeEvaluation::create([
                     'CLO_id' => $clo_id,
@@ -67,7 +77,7 @@ class EvaluationController extends Controller
 
     public function destroy(Curriculum $curriculum, Course $course, Evaluation $evaluation)
     {
-        if($evaluation->file){
+        if ($evaluation->file) {
             Storage::disk('public')->delete($evaluation->file);
         }
         CourseLearningOutcomeEvaluation::where('evaluation_id', $evaluation->id)->forceDelete();

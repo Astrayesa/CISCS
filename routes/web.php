@@ -42,7 +42,7 @@ Route::prefix("/admin")->name('admin.')->group(function () {
         Route::resource("curriculum.course.topic", TopicController::class);
         Route::resource("curriculum.course.evaluation", EvaluationController::class);
         Route::resource("curriculum.lo", LearningOutcomeController::class)->parameter("lo", "learningOutcome");
-        Route::resource("curriculum.gp", GraduateProfileController::class)->parameter("gp", "graduateProfile");
+        Route::resource("curriculum.gp", GraduateProfileController::class)->parameter("gp", "graduateProfile")->except("show");
         Route::resource("user", UserController::class);
 
         Route::post('logout', [AuthController::class, 'destroy'])->name("logout");

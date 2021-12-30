@@ -75,6 +75,64 @@
     </div>
     <!-- /.card -->
 
+
+    <!-- /.card -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Curriculum Graduate Profiles</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-append">
+                        <a href="{{ route('admin.curriculum.gp.create', $curriculum->id) }}"
+                           class="btn btn-primary">Add Graduate Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive">
+            <table class="table table-hover text-wrap w-100 data-table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Aspect</th>
+                    <th>Courses</th>
+                    <th style="width: 15%">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($graduateProfiles as $gp)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $gp->title_en }}</td>
+                        <td>{{ $gp->aspect }}</td>
+                        <td>
+                            @foreach ($gp->courses as $e_clo)
+                                <span class="badge badge-secondary">{{ $e_clo->title_en }}</span>
+                            @endforeach
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm right">
+                                <div class="input-group-append">
+                                    <a href="{{ route('admin.curriculum.gp.edit', [$curriculum->id, $gp->id]) }}"
+                                       class="btn btn-warning">Edit</a>
+                                    <button class="btn btn-danger"
+                                            onclick="deleteData({{ $gp->id }}, 'graduate_profile')">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
     <!-- /.card -->
     <div class="card mb-4">
         <div class="card-header">
@@ -112,8 +170,6 @@
                                             data-target="#LO_modal" onclick="setLO({{ $lo->id }})">
                                         Show
                                     </button>
-                                    {{--<a href="{{ route('admin.curriculum.lo.show', [$curriculum->id, $lo->id]) }}"
-                                       class="btn btn-success">Show</a>--}}
                                     <a href="{{ route('admin.curriculum.lo.edit', [$curriculum->id, $lo->id]) }}"
                                        class="btn btn-warning">Edit</a>
                                     <button class="btn btn-danger"
@@ -180,64 +236,6 @@
     </div>
     <!-- /.card -->
 
-    <!-- /.card -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h3 class="card-title">Curriculum Graduate Profiles</h3>
-            <div class="card-tools">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-append">
-                        <a href="{{ route('admin.curriculum.gp.create', $curriculum->id) }}"
-                           class="btn btn-primary">Add Graduate Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body table-responsive">
-            <table class="table table-hover text-wrap w-100 data-table">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Aspect</th>
-                    <th>Courses</th>
-                    <th style="width: 15%">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($graduateProfiles as $gp)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $gp->title_en }}</td>
-                        <td>{{ $gp->aspect }}</td>
-                        <td>
-                            @foreach ($gp->courses as $e_clo)
-                                <span class="badge badge-secondary">{{ $e_clo->title_en }}</span>
-                            @endforeach
-                        </td>
-                        <td>
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-append">
-                                    <a href="{{ route('admin.curriculum.gp.show', [$curriculum->id, $gp->id]) }}"
-                                       class="btn btn-success">Show</a>
-                                    <a href="{{ route('admin.curriculum.gp.edit', [$curriculum->id, $gp->id]) }}"
-                                       class="btn btn-warning">Edit</a>
-                                    <button class="btn btn-danger"
-                                            onclick="deleteData({{ $gp->id }}, 'graduate_profile')">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
 @endsection
 
 @section("script")

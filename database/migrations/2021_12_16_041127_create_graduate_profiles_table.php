@@ -16,10 +16,10 @@ class CreateGraduateProfilesTable extends Migration
         Schema::create('graduate_profiles', function (Blueprint $table) {
             $table->id();
 
-            $table->string("code");
-            $table->string("title_en");
-            $table->string("title_id");
-            $table->string("aspect");
+            $table->string("code", 20);
+            $table->string("title_en", 100);
+            $table->string("title_id", 100);
+            $table->string("aspect", 50);
 
 
             $table->unsignedBigInteger("curriculum_id");

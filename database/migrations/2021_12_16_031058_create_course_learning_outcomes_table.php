@@ -16,10 +16,10 @@ class CreateCourseLearningOutcomesTable extends Migration
         Schema::create('course_learning_outcomes', function (Blueprint $table) {
             $table->id();
 
-            $table->string("title_en");
-            $table->string("title_id");
-            $table->string("desc_en");
-            $table->string("desc_id");
+            $table->string("title_en", 50);
+            $table->string("title_id", 50);
+            $table->string("desc_en", 100);
+            $table->string("desc_id", 100);
             $table->double("percent_to_graduate_LO");
 
             $table->unsignedBigInteger("lesson_plan_id");
